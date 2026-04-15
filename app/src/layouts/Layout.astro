@@ -1,0 +1,86 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title} - Empresa Plana</title>
+		<link href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)" rel="stylesheet">
+		<link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap)" rel="stylesheet">
+	</head>
+	<body>
+		<!-- NAV -->
+		<nav class="nav-glass shadow-lg sticky top-0 z-50">
+		  <div class="max-w-7xl mx-auto px-4">
+		    <div class="flex justify-between items-center h-16">
+		      <a href="/" class="flex items-center gap-3 group flex-shrink-0">
+		        <div class="w-10 h-10 bg-plana-red rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
+		          <i class="fas fa-bus text-white text-lg bus-icon"></i>
+		        </div>
+		        <div class="leading-tight">
+		          <span class="text-white font-bold text-xl tracking-tight">Empresa</span>
+		          <span class="text-red-400 font-bold text-xl"> Plana</span>
+		        </div>
+		      </a>
+		      <div class="hidden lg:flex items-center gap-1">
+		        <a href="/" class="text-gray-200 hover:text-white px-3 py-2 rounded-lg hover:bg-white/10 text-sm font-medium"><i class="fas fa-home mr-1"></i>Inicio</a>
+		        <a href="/rutas" class="text-gray-200 hover:text-white px-3 py-2 rounded-lg hover:bg-white/10 text-sm font-medium"><i class="fas fa-route mr-1"></i>Líneas</a>
+		      </div>
+		      <div class="flex items-center gap-2">
+		        <a href="/transfers" class="hidden lg:inline-flex items-center gap-1 bg-plana-red hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+		          <i class="fas fa-ticket-alt"></i>Reservar
+		        </a>
+		      </div>
+		    </div>
+		  </div>
+		</nav>
+
+		<main>
+			<slot />
+		</main>
+
+        <footer class="footer-bg text-white mt-16 py-12 text-center text-sm">
+            <p>© 2026 Empresa Plana. Todos los derechos reservados.</p>
+        </footer>
+	</body>
+</html>
+
+<style is:global>
+  * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+  :root{
+    --red:#d62828; --blue:#1d3557; --blue2:#457b9d;
+    --bg:#eef2f7; --surface:#ffffff; --border:#e5e7eb;
+    --text:#111827; --muted:#6b7280; --subtle:#f3f4f6;
+    --glass-bg: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.35);
+    --glass-blur: blur(18px) saturate(180%);
+  }
+  body{ background: var(--bg); color: var(--text); min-height: 100vh; }
+  body::before{
+    content:''; position: fixed; inset: 0; z-index: -1;
+    background: radial-gradient(ellipse 80% 60% at 10% 20%, rgba(29,53,87,.18) 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 90% 80%, rgba(69,123,157,.15) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 50% 50%, rgba(214,40,40,.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .nav-glass{
+    background: rgba(29,53,87,0.72) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  .bg-plana-blue{ background-color:var(--blue); }
+  .bg-plana-red { background-color:var(--red);  }
+  .hero-section{ background: linear-gradient(135deg, #0d2137 0%, #1d3557 40%, #2d6a8f 70%, #3a8ab5 100%) !important; }
+  .footer-bg{ background: rgba(29,53,87,0.85); backdrop-filter: blur(20px) saturate(160%); }
+  .surface{ background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); }
+  .bus-icon { animation: busMove 3s ease-in-out infinite; }
+  @keyframes busMove { 0%,100%{transform:translateX(0)} 50%{transform:translateX(6px)} }
+</style>
